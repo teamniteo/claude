@@ -36,7 +36,7 @@
             type = "http";
             url = "https://prometheus.niteo.co/mcp/";
             headers = {
-              Authorization = "Basic $PROMETHEUS_AUTH";
+              Authorization = "Basic \${PROMETHEUS_AUTH}";
             };
           };
         };
