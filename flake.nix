@@ -1,20 +1,25 @@
 {
   description = "Shared Claude Code configuration for Niteo";
 
-  outputs = { self }: {
-    lib = {
-      # Raw markdown content as a string
-      claudeContent = builtins.readFile ./CLAUDE.md;
+  inputs = {
+    mcp-nixos.url = "github:utensils/mcp-nixos";
+  };
 
-      # Rules as attribute set (name -> content)
-      rules = {
-        # "testing" = builtins.readFile ./rules/testing.md;
-      };
+  outputs =
+    { self, mcp-nixos }:
+    {
+      lib = {
+        claudeContent = builtins.readFile ./CLAUDE.md;
 
-      # Commands as attribute set (name -> content)
-      commands = {
-        # "pr" = builtins.readFile ./commands/pr.md;
+        rules = {
+          comments = builtins.readFile ./rules/comments.md;
+        };
+
+        mcpServers = pkgs: {
+          mcp-nixos = {
+            command = "${mcp-nixos.packages.${pkgs.stdenv.hostPlatform.system}.default}/bin/mcp-nixos";
+          };
+        };
       };
     };
-  };
 }

@@ -45,7 +45,6 @@ TODO:
     ```Explain the logic in @src/utils/auth.js```
     ```Show me the data from @github:repos/owner/repo/issues```
 * Keep SKILL.md under 500 lines for optimal performance. If your content exceeds this, split detailed reference material into separate files.
-* changelog: skills and /commands are merged?
 * prepend all commit messages with fix, feature, cleanup, chore, ...
     -> can we have a pre-commit check for this?
 * https://code.claude.com/docs/en/hooks-guide#custom-notification-hook
@@ -61,6 +60,6 @@ TODO:
 * https://code.claude.com/docs/en/statusline
 * forceLoginMethod
 * https://code.claude.com/docs/en/memory#claude-md-imports
-
+* branch name conventions
 
 
