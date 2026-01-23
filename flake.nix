@@ -30,8 +30,15 @@
             command = "${mcp-nixos.packages.${pkgs.stdenv.hostPlatform.system}.default}/bin/mcp-nixos";
           };
 
-          # Authentication via PROMETHEUS_AUTH environment variable
-          # export PROMETHEUS_AUTH="$(echo -n 'grafana:<PASSWORD>' | base64)"
+          # Token is created on https://niteo.grafana.net/org/serviceaccounts
+          mcp-grafana = {
+            command = "${pkgs.mcp-grafana}/bin/mcp-grafana";
+            env = {
+              GRAFANA_URL = "https://niteo.grafana.net";
+              GRAFANA_SERVICE_ACCOUNT_TOKEN = "\${GRAFANA_SERVICE_ACCOUNT_TOKEN}";
+            };
+          };
+
           prometheus = {
             type = "http";
             url = "https://prometheus.niteo.co/mcp/";

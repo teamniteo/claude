@@ -29,5 +29,10 @@ Run `make check` before committing to ensure code style compliance.
 - Follow the naming pattern of existing test files and cases.
 - Use the `responses` library for mocking external HTTP requests - **never use `@patch`**.
 
+## MCP Servers
 
+- **Grafana**: Requires `GRAFANA_SERVICE_ACCOUNT_TOKEN` environment variable from 1Password.
+- **Prometheus**:
+    1. Requires `PROMETHEUS_AUTH` environment variable. Get the password from 1Password then run `export PROMETHEUS_AUTH="$(echo -n 'grafana:<PASSWORD>' | base64)"`.
+    2. Requires Niteo VPN connection. If the Prometheus MCP fails to connect, ask the user to connect to the Niteo VPN.
 
