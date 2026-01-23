@@ -34,7 +34,7 @@
           # export PROMETHEUS_AUTH="$(echo -n 'grafana:<PASSWORD>' | base64)"
           prometheus = {
             type = "http";
-            url = "https://cruncher.niteo.co/mcp/";
+            url = "https://prometheus.niteo.co/mcp/";
             headers = {
               Authorization = "Basic $PROMETHEUS_AUTH";
             };
