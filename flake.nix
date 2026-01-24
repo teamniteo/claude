@@ -19,12 +19,21 @@
         };
 
         enabledPlugins = {
-          "github@claude-plugins-official" = true;
-          "sentry@claude-plugins-official" = true;
           "code-review@claude-plugins-official" = true;
+          "sentry@claude-plugins-official" = true;
         };
 
         mcpServers = pkgs: {
+
+          # Local server with PAT because remote OAuth broken in Claude Code:
+          # https://github.com/anthropics/claude-code/issues/3433
+          github = {
+            command = "${pkgs.github-mcp-server}/bin/github-mcp-server";
+            args = [ "stdio" ];
+            env = {
+              GITHUB_PERSONAL_ACCESS_TOKEN = "\${GITHUB_PERSONAL_ACCESS_TOKEN}";
+            };
+          };
 
           mcp-nixos = {
             command = "${mcp-nixos.packages.${pkgs.stdenv.hostPlatform.system}.default}/bin/mcp-nixos";

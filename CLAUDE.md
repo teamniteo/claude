@@ -31,6 +31,7 @@ Run `make check` before committing to ensure code style compliance.
 
 ## MCP Servers
 
+- **GitHub**: Requires `GITHUB_PERSONAL_ACCESS_TOKEN` environment variable. Create a read-only (classic) token at https://github.com/settings/tokens.
 - **Grafana**: Requires `GRAFANA_SERVICE_ACCOUNT_TOKEN` environment variable from 1Password.
 - **Prometheus**:
     1. Requires `PROMETHEUS_AUTH` environment variable. Get the password from 1Password then run `export PROMETHEUS_AUTH="$(echo -n 'grafana:<PASSWORD>' | base64)"`.
