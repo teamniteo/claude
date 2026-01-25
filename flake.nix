@@ -18,6 +18,7 @@
           comments = builtins.readFile ./rules/comments.md;
         };
 
+        # You have to have the official plugins marketplace installed and updated
         enabledPlugins = {
           "claude-md-management@claude-plugins-official" = true;
           "code-review@claude-plugins-official" = true;
@@ -25,6 +26,9 @@
         };
 
         permissions.allow = [
+          "Read(/nix/store/*)"
+          "Read(nix flake show *)"
+          "Read(nix eval *)"
           "WebFetch"
           "WebSearch"
           "mcp__cloudflare-docs__*"
