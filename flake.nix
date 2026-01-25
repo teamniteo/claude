@@ -23,6 +23,17 @@
           "sentry@claude-plugins-official" = true;
         };
 
+        permissions.allow = [
+          "mcp__cloudflare-docs__*"
+          "mcp__customerio__*"
+          "mcp__github__*"
+          "mcp__heroku__*"
+          "mcp__mcp-grafana__*"
+          "mcp__mcp-nixos__*"
+          "mcp__plugin_sentry_sentry__*"
+          "mcp__prometheus__*"
+        ];
+
         mcpServers = pkgs: {
 
           cloudflare-docs = {
@@ -40,6 +51,7 @@
             };
           };
 
+          # Login with `heroku login`
           heroku = {
             command = "${pkgs.heroku}/bin/heroku";
             args = [ "mcp:start" ];
@@ -49,6 +61,7 @@
           };
 
           # Token is created on https://niteo.grafana.net/org/serviceaccounts
+          # and is saved in 1Password
           mcp-grafana = {
             command = "${pkgs.mcp-grafana}/bin/mcp-grafana";
             env = {
@@ -61,12 +74,18 @@
             command = "${mcp-nixos.packages.${pkgs.stdenv.hostPlatform.system}.default}/bin/mcp-nixos";
           };
 
+          # export PROMETHEUS_AUTH="$(echo -n 'grafana:<PASSWORD_FROM_1P>' | base64)"
           prometheus = {
             type = "http";
             url = "https://prometheus.niteo.co/mcp/";
             headers = {
               Authorization = "Basic \${PROMETHEUS_AUTH}";
             };
+          };
+
+          customerio = {
+            type = "http";
+            url = "https://mcp-eu.customer.io/mcp";
           };
         };
 
