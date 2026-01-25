@@ -43,6 +43,9 @@
           heroku = {
             command = "${pkgs.heroku}/bin/heroku";
             args = [ "mcp:start" ];
+            env = {
+              PATH = "${pkgs.nodejs}/bin:${pkgs.heroku}/bin";
+            };
           };
 
           # Token is created on https://niteo.grafana.net/org/serviceaccounts
