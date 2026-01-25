@@ -69,3 +69,17 @@ TODO:
 * branch name conventions
 * https://github.com/roman/mcps.nix
 * https://docs.customer.io/ai/mcp-server/
+* slack mcp
+* agentsDir = "${claude-plugins}/plugins/code-simplifier/agents";
+
+      ### Technical preferences:
+      - Backend: Python + Pyramid framework, pytest for testing, ruff for linting
+      - Frontend: Elm, elm-land
+      - DevOps: Nix, OpenAPI, Makefiles, pre-commit-hooks, GitHub Actions
+      - Functional programming enthusiast: Nix, Elm
+      - Integrates with
+        - Heroku for hosting
+        - Cloudflare for CDN and DNS
+        - Customer.io for emails
+        - HelpScout for support
+        - Paddle for payments

@@ -31,8 +31,10 @@ Run `make check` before committing to ensure code style compliance.
 
 ## MCP Servers
 
+- **Cloudflare Docs**: Provides up-to-date Cloudflare documentation, no auth required.
 - **GitHub**: Requires `GITHUB_PERSONAL_ACCESS_TOKEN` environment variable. Create a read-only (classic) token at https://github.com/settings/tokens.
 - **Grafana**: Requires `GRAFANA_SERVICE_ACCOUNT_TOKEN` environment variable from 1Password.
+- **Heroku**: Uses existing Heroku CLI authentication. If unauthenticated, ask the user to run `heroku login`. Get the project's Heroku app name from README.md.
 - **Prometheus**:
     1. Requires `PROMETHEUS_AUTH` environment variable. Get the password from 1Password then run `export PROMETHEUS_AUTH="$(echo -n 'grafana:<PASSWORD>' | base64)"`.
     2. Requires Niteo VPN connection. If the Prometheus MCP fails to connect, ask the user to connect to the Niteo VPN.

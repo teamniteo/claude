@@ -25,6 +25,11 @@
 
         mcpServers = pkgs: {
 
+          cloudflare-docs = {
+            type = "http";
+            url = "https://docs.mcp.cloudflare.com/mcp";
+          };
+
           # Local server with PAT because remote OAuth broken in Claude Code:
           # https://github.com/anthropics/claude-code/issues/3433
           github = {
@@ -35,8 +40,9 @@
             };
           };
 
-          mcp-nixos = {
-            command = "${mcp-nixos.packages.${pkgs.stdenv.hostPlatform.system}.default}/bin/mcp-nixos";
+          heroku = {
+            command = "${pkgs.heroku}/bin/heroku";
+            args = [ "mcp:start" ];
           };
 
           # Token is created on https://niteo.grafana.net/org/serviceaccounts
@@ -46,6 +52,10 @@
               GRAFANA_URL = "https://niteo.grafana.net";
               GRAFANA_SERVICE_ACCOUNT_TOKEN = "\${GRAFANA_SERVICE_ACCOUNT_TOKEN}";
             };
+          };
+
+          mcp-nixos = {
+            command = "${mcp-nixos.packages.${pkgs.stdenv.hostPlatform.system}.default}/bin/mcp-nixos";
           };
 
           prometheus = {
