@@ -69,6 +69,9 @@ TODO:
 * branch name conventions
 * https://github.com/roman/mcps.nix
 * https://docs.customer.io/ai/mcp-server/
+* https://github.com/anthropics/claude-plugins-official/blob/main/plugins/code-simplifier/agents/code-simplifier.md
+* https://github.com/anthropics/claude-plugins-official/tree/main/plugins/commit-commands/commands
+* https://github.com/anthropics/claude-plugins-official/blob/main/plugins/code-review/commands/code-review.md
 * slack mcp
 * agentsDir = "${claude-plugins}/plugins/code-simplifier/agents";
 

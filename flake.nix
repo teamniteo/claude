@@ -19,11 +19,14 @@
         };
 
         enabledPlugins = {
+          "claude-md-management@claude-plugins-official" = true;
           "code-review@claude-plugins-official" = true;
           "sentry@claude-plugins-official" = true;
         };
 
         permissions.allow = [
+          "WebFetch"
+          "WebSearch"
           "mcp__cloudflare-docs__*"
           "mcp__customerio__*"
           "mcp__github__*"
