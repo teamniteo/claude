@@ -38,6 +38,7 @@
           "mcp__mcp-grafana__*"
           "mcp__mcp-nixos__*"
           "mcp__plugin_sentry_sentry__*"
+          "mcp__imagesorcery-mcp__*"
           "mcp__prometheus__*"
         ];
 
@@ -93,6 +94,11 @@
           customerio = {
             type = "http";
             url = "https://mcp-eu.customer.io/mcp";
+          };
+
+          imagesorcery-mcp = {
+            command = "${pkgs.uv}/bin/uvx";
+            args = [ "imagesorcery-mcp" ];
           };
         };
 
