@@ -64,6 +64,9 @@ and the tests in a single `test_<module>.py` file in the top-level `tests/` fold
 
 ## Code Style
 
+- Ruff formatting, 88 char line limit.
+- Type annotations required everywhere.
+- `from x import y` imports first (sorted), blank line, then `import z` imports (sorted).
 - Error handling: Use HTTP exceptions with JSON payloads, proper status codes
 - Docstrings: Brief first line, details after blank line. Never use `Args:` and `Returns:` - use type annotations instead
 
@@ -73,7 +76,7 @@ and the tests in a single `test_<module>.py` file in the top-level `tests/` fold
 - Write tests for all new features and bug fixes.
 - Follow the naming pattern of existing test files and cases.
 - Use the `responses` library for mocking external HTTP requests - **never use `@patch`**.
-- Use `freezegun` for time-dependent tests.
+- Use `freezegun` for time-dependent tests  - **never use `@patch`**.
 
 ## Playwright
 

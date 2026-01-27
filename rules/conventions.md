@@ -8,6 +8,7 @@
 - Clean up unused code lying around.
 - DRY in code is bad, but DRY in tests is good.
 - Don't rely on discipline, prefer automated enforcement.
+- Old documentation is worse than no documentation: remember to regularly update CLAUDE.md and rules/*.md files.
 
 ## Code Style
 
