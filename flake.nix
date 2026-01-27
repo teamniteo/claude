@@ -10,13 +10,17 @@
     {
       lib = {
 
-        # Projects import this:
-        claudeContent = builtins.readFile ./CLAUDE.md;
-
-        # Niteans's HomeManager setup imports these:
-        rules = {
-          comments = builtins.readFile ./rules/comments.md;
-        };
+        rules =
+          let
+            files = builtins.attrNames (builtins.readDir ./rules);
+            mdFiles = builtins.filter (name: builtins.match ".*\\.md" name != null) files;
+          in
+          builtins.listToAttrs (
+            builtins.map (name: {
+              name = builtins.replaceStrings [ ".md" ] [ "" ] name;
+              value = builtins.readFile (./rules + "/${name}");
+            }) mdFiles
+          );
 
         # You have to have the official plugins marketplace installed and updated
         enabledPlugins = {
@@ -25,6 +29,7 @@
           "sentry@claude-plugins-official" = true;
         };
 
+        # Allow read-only operations by default
         permissions.allow = [
           "Read(/nix/store/*)"
           "Read(nix flake show *)"
