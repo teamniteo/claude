@@ -29,11 +29,25 @@
           "sentry@claude-plugins-official" = true;
         };
 
-        # Allow read-only operations by default
+        # Allow ~safe read-only operations by default
         permissions.allow = [
+          "Bash(git branch*)"
+          "Bash(git diff*)"
+          "Bash(git log*)"
+          "Bash(git remote*)"
+          "Bash(git show*)"
+          "Bash(git status*)"
+          "Bash(git tag*)"
+          "Bash(nix eval *)"
+          "Bash(nix flake metadata*)"
+          "Bash(nix flake show*)"
+          "Bash(nix path-info *)"
+          "Bash(nix search *)"
+          "Bash(wc *)"
+          "Bash(which *)"
           "Read(/nix/store/*)"
-          "Read(nix flake show *)"
           "Read(nix eval *)"
+          "Read(nix flake show *)"
           "WebFetch"
           "WebSearch"
           "mcp__cloudflare-docs__*"
