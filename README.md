@@ -55,3 +55,4 @@ TODO:
 * https://github.com/anthropics/claude-plugins-official/blob/main/plugins/code-review/commands/code-review.md
 * slack mcp
 * agentsDir = "${claude-plugins}/plugins/code-simplifier/agents";
+* document OpenAPI glue between backend and frontend
