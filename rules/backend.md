@@ -67,6 +67,7 @@ and the tests in a single `test_<module>.py` file in the top-level `tests/` fold
 - Ruff formatting, 88 char line limit.
 - Type annotations required everywhere.
 - `from x import y` imports first (sorted), blank line, then `import z` imports (sorted).
+- Always import typing like this: `import typing as t`s
 - Error handling: Use HTTP exceptions with JSON payloads, proper status codes
 - Docstrings: Brief first line, details after blank line. Never use `Args:` and `Returns:` - use type annotations instead
 
