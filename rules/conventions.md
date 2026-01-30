@@ -57,7 +57,7 @@ The prefix can be one of the following:
 - `fix`: for bug fixes
 - `chore`: other
 
-Every commit message should end with one or multiple lines: `Refs: #<issue-number>`, linking to the relevant GitHub issue(s).
+Every commit message should end with one or multiple lines of `Refs #<issue-number>`, linking to the relevant GitHub issue(s).
 
 NEVER append "Authored by Claude Code" to commit messages.
 
