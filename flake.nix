@@ -59,6 +59,7 @@
           "mcp__plugin_sentry_sentry__*"
           "mcp__imagesorcery-mcp__*"
           "mcp__prometheus__*"
+          "mcp__help-scout__*"
         ];
 
         mcpServers = pkgs: {
@@ -118,6 +119,15 @@
           imagesorcery-mcp = {
             command = "${pkgs.uv}/bin/uvx";
             args = [ "imagesorcery-mcp" ];
+          };
+
+          # Requires HELPSCOUT_APP_ID and HELPSCOUT_APP_SECRET in environment
+          # Get credentials from Help Scout → Your Profile → My Apps -> Create App
+          # Name it "Claude MCP", the URL can be anything (e.g. https://niteo.co)
+          help-scout = {
+            type = "stdio";
+            command = "${pkgs.bash}/bin/bash";
+            args = [ "-c" "PATH=${pkgs.nodejs}/bin:$PATH npx help-scout-mcp-server" ];
           };
         };
 
