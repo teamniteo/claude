@@ -47,7 +47,22 @@ See [Elm Land routing docs](https://elm.land/guide/routing) for more info.
 
 ### `src/Api/`
 
-Auto-generated API client from the backend's `openapi.yaml` spec. DO NOT EDIT - changes are overwritten whenever nix recreates the development environment.
+Auto-generated API client from the backend's `openapi.yaml` spec is placed into `src/Api/`. DO NOT EDIT - changes are overwritten whenever nix recreates the development environment.
+
+### Prefer `Maybe.withDefault` one-liners over verbose `case` statements
+
+
+Good:
+```elm
+text (value |> Maybe.map toString |> Maybe.withDefault "-")
+```
+
+bad:
+```elm
+case value of
+    Just v -> text (toString v)
+    Nothing -> text "-"
+```
 
 ## Code Style
 
