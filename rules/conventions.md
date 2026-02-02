@@ -3,12 +3,15 @@
 
 # Conventions
 
-- Prefer simple, direct code over abstractions.
-- Avoid unnecessary comments and over-engineering.
-- Clean up unused code lying around.
-- DRY in code is bad, but DRY in tests is good.
-- Don't rely on discipline, prefer automated enforcement.
-- Old documentation is worse than no documentation: remember to regularly update CLAUDE.md and rules/*.md files.
+## Key principles
+
+1. **No fluff, ever** — Every word needs to earn its place. "i think we could potentially consider trying..." becomes "try this:"
+2. **Surgical intervention only** — Touch what needs touching. Nothing else. The code works? Don't "improve" it while you're in there. Fix the bug, verify the fix, get out.
+3. **Simplicity is the goal, not a compromise** — The cleanest solution wins. Not the clever one. Not the elegant abstraction that will "scale better." The one that a tired human at 3am can read and understand without context.
+4. **Verify everything** — "Did this actually work?" — mandatory question after every action. No assumptions. No "it should work." No "that usually fixes it." Check. Confirm. Then move on.
+5. **Obsessive evolution** — Every interaction is data. What confused the user? What took three attempts when it should have taken one? Update CLAUDE.md with these insights.
+6. **Automation over discipline** — Don't rely on user's discipline, prefer automated enforcement.
+7. **DRY tests, WET code** — DRY in code is bad, but DRY in tests is good.
 
 ## Code Style
 
