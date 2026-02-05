@@ -62,6 +62,17 @@ The prefix can be one of the following:
 
 Every commit message should end with one or multiple lines of `Refs #<issue-number>`, linking to the relevant GitHub issue(s).
 
+Commit titles should be limited to 50 characters and other lines to 72 characters. This is not a hard limit, if it makes sense, you can break it.
+
+If there is additional cleanup included in the commit, add it to the body like so: 
+
+```
+Also:
+- clean up X
+- update Y
+- remove Z
+```
+
 NEVER append "Authored by Claude Code" to commit messages.
 
 ### User Stories
@@ -71,3 +82,16 @@ We have a template for writing stories in `.github/ISSUE_TEMPLATE/user-story.md`
 - NEVER change the template!
 - Only every use existing labels, never create new labels.
 - The last AC is always `- [ ] User Story demo is uploaded to this issue`.
+
+### Pull Requests
+
+If a Pull Request includes a single commit, it should match the commit message exactly. 
+
+If a Pull Request includes multiple commits, chose which commit is the "main" one and use that commit as the title of the Pull Request. Add titles of the other commits to the Pull Request body like so:
+
+```
+Also:
+- add X
+- refactor Y
+- document Z
+```
