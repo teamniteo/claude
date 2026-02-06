@@ -22,6 +22,17 @@
             }) mdFiles
           );
 
+        skills =
+          let
+            skillDirs = builtins.attrNames (builtins.readDir ./skills);
+          in
+          builtins.listToAttrs (
+            builtins.map (name: {
+              inherit name;
+              value = ./skills + "/${name}";
+            }) skillDirs
+          );
+
         # You have to have the official plugins marketplace installed and updated
         enabledPlugins = {
           "claude-md-management@claude-plugins-official" = true;
