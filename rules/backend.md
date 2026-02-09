@@ -78,6 +78,7 @@ and the tests in a single `test_<module>.py` file in the top-level `tests/` fold
 - Follow the naming pattern of existing test files and cases.
 - Use the `responses` library for mocking external HTTP requests - **never use `@patch`**.
 - Use `freezegun` for time-dependent tests  - **never use `@patch`**.
+- Always use `make unit filter=foo` to run a subset of tests. Never run pytest directly as the set-up will not be correct.
 
 ## Playwright
 
