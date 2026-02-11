@@ -108,3 +108,24 @@ If you see this error when running `make run`, it means your file descriptor lim
 
 Run `ulimit -n` to confirm the limit. If it's less than 4096, you can increase it by running `ulimit -n 4096`. To make the increase permanent, either add `ulimit -n 4096` to your shell profile or increase the limit in `/etc/security/limits.conf`. On a nix-darwin setup, you do it like this:
 https://github.com/zupo/dotfiles/commit/81f34f0f4a0db7a851bfbd789dbf1c8ea309e58a
+
+## Playwright browsers missing
+
+If you see an error like this: 
+
+```
+E           playwright._impl._errors.Error: BrowserType.launch: Executable doesn't exist at /nix/store/bzq4f173df781lbb4zg2jykddhckj7mh-playwright-browsers/chromium-1200/chrome-mac-arm64/Google Chrome for Testing.app/Contents/MacOS/Google Chrome for Testing
+E           ╔════════════════════════════════════════════════════════════╗
+E           ║ Looks like Playwright was just installed or updated.       ║
+E           ║ Please run the following command to download new browsers: ║
+E           ║                                                            ║
+E           ║     playwright install                                     ║
+E           ║                                                            ║
+E           ║ <3 Playwright Team                                         ║
+E           ╚════════════════════════════════════════════════════════════╝
+```
+
+This usually means that the Playwright version installed by Nix does not match the Playwright version installed by `uv`:
+- The pin in `backend/pyproject.toml` must match the browser revision in `pkgs.playwright-driver.browsers` (set via `PLAYWRIGHT_BROWSERS_PATH` in `default.nix`).
+- Check browser revisions with: `ls $PLAYWRIGHT_BROWSERS_PATH`
+- `playwright` pip version ≠ `playwright-driver` nixpkgs version (Python vs Node.js versioning).
