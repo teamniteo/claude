@@ -108,3 +108,7 @@ If you see this error when running `make run`, it means your file descriptor lim
 
 Run `ulimit -n` to confirm the limit. If it's less than 4096, you can increase it by running `ulimit -n 4096`. To make the increase permanent, either add `ulimit -n 4096` to your shell profile or increase the limit in `/etc/security/limits.conf`. On a nix-darwin setup, you do it like this:
 https://github.com/zupo/dotfiles/commit/81f34f0f4a0db7a851bfbd789dbf1c8ea309e58a
+
+### Heroku Reviewapp not deploying, database migrations not applied
+
+If you encounter this, you need to use MCP and re-create the Reviewapp in Heroku. 
