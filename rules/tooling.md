@@ -17,7 +17,7 @@ the official plugins marketplace.
 ## MCP Servers
 
 - **Cloudflare Docs**: Provides up-to-date Cloudflare documentation.
-- **GitHub**: Requires `GITHUB_PERSONAL_ACCESS_TOKEN` environment variable. Create a read-only (classic) token at https://github.com/settings/tokens.
+- **GitHub**: Requires `GITHUB_PERSONAL_ACCESS_TOKEN` environment variable. Create a read-only (classic) token at https://github.com/settings/tokens. Always use this MCP instead of the `gh` CLI command.
 - **Grafana**: Requires `GRAFANA_SERVICE_ACCOUNT_TOKEN` environment variable from 1Password.
 - **Heroku**: Uses existing Heroku CLI authentication. If unauthenticated, ask the user to run `heroku login`. Get the project's Heroku app name from README.md.
 - **ImageSorcery**: Local image manipulation (crop, blur, optimize).
