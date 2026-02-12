@@ -129,3 +129,7 @@ This usually means that the Playwright version installed by Nix does not match t
 - The pin in `backend/pyproject.toml` must match the browser revision in `pkgs.playwright-driver.browsers` (set via `PLAYWRIGHT_BROWSERS_PATH` in `default.nix`).
 - Check browser revisions with: `ls $PLAYWRIGHT_BROWSERS_PATH`
 - `playwright` pip version ≠ `playwright-driver` nixpkgs version (Python vs Node.js versioning).
+
+### Heroku Reviewapp issues
+
+After multiple rebases and re-pushes to a Pull Request, the Heroku Review App can in a weird state and have strange errors. Before debugging issues, always first re-create it from scratch, by using the Heroku MCP to first delete it and then create it again. Be careful to only do this to Review Apps, and never to Staging or Production apps!
