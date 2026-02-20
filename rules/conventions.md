@@ -98,4 +98,6 @@ Also:
 
 ## Documentation
 
-After finishing your work, look for `documentation/` and `frontend/static/documentation/` folders. These contain our documentation. If applicable, update them based on the work you have just performed. 
+After finishing your work, look for `documentation/` and `frontend/static/documentation/` folders. These contain our documentation. If applicable, update them based on the work you have just performed.
+
+Also update any README.md files you encounter, if applicable. 
