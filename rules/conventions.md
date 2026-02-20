@@ -98,4 +98,4 @@ Also:
 
 ## Documentation
 
-After finishing your work, look for `Archibald` and `frontend/static/documentation` folders. These contain our documentation. If applicable, update them based on the work you have just performed. 
+After finishing your work, look for `documentation/` and `frontend/static/documentation/` folders. These contain our documentation. If applicable, update them based on the work you have just performed. 
