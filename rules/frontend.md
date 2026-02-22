@@ -49,7 +49,7 @@ See [Elm Land routing docs](https://elm.land/guide/routing) for more info.
 
 Auto-generated API client from the backend's `openapi.yaml` spec is placed into `src/Api/`. DO NOT EDIT - changes are overwritten whenever nix recreates the development environment.
 
-### Prefer `Maybe.withDefault` one-liners over verbose `case` statements
+## Prefer `Maybe.withDefault` one-liners over verbose `case` statements
 
 
 Good:
@@ -67,5 +67,36 @@ case value of
 ## Code Style
 
 - Use `elm-format` for all Elm code.
+
+## Color Palette
+
+Read @frontend/README.md to learn what colors to use. Avoid creating new color variations - stick to the established palette.
+
+## Semantic Classes
+
+Use these Tailwind custom classes for consistency:
+- `text-heading` - Main heading text color
+- `text-muted-foreground` - Muted/secondary text
+- `text-foreground` - Default text color
+- `text-destructive` - Destructive action text
+- `border-input-border` - Standard input border
+
+## Component Patterns
+
+- **Consistency**: When building new components, examine existing similar components to understand patterns.
+- **Reusability**: Use existing components from `Components/` directory when possible.
+- **Tailwind**: Use Tailwind CSS utility classes for styling.
+- **Accessibility**: Include proper ARIA attributes and semantic HTML.
+
+## Icons
+
+- Always use Lucide icons.
+- **Never** use icons from Heroicons, Font Awesome, or other libraries — only Lucide.
+- **Never** inline SVGs, add icons under `Components/Icons/*.elm`.
+- **Never** use raw SVGs without confirming they are from Lucide first.
+- Find Lucide icons SVGs here: https://github.com/lucide-icons/lucide/tree/main/icons.
+- Use Lucide naming: arrow-left -> ArrowLeft.elm
+- Follow existing icon file conventions (name/signature, SVG defaults, sizing, source comment).
+
 
 
