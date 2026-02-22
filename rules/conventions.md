@@ -36,6 +36,8 @@ and should include a link to the GitHub issue or comment that explains the reaso
 
 ## git
 
+NEVER push directly to `main`. Always work on a feature branch and create a Pull Request. This rule has NO exceptions — not even for "quick fixes" or single commits.
+
 Before any work, always ask the user what GitHub Issue they are working on. Then check the current branch. If you are on `main`, ask the user which branch to checkout (list 5 most recent branches) or to create a new one. Propose the branch name based on the GitHub Issue that is being worked on. When creating a new branch, always base it off the latest `origin/main`.
 
 ### Branch naming convention
