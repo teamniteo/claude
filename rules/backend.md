@@ -37,7 +37,7 @@ backend/
 │   │   ├── customerio.py    # Customer.io integration
 │   │   ├── logs.py          # Logging configuration
 │   │   ├── metrics.py       # Prometheus metrics collection
-│   │   ├── openapi.py       # OpenAPI schema integration
+│   │   ├── openapi/         # OpenAPI schema integration
 │   │   └── redis.py         # Redis client configuration
 │   └── bar/                 # Additional vendored dependencies
 ├── etc/                     # Environment configs (development/production/test.ini)
@@ -87,7 +87,16 @@ Help the user by giving them this advice:
 - `make browsertests filter="foo"` runs browser tests matching "foo", in headed mode.
 - Force headed mode by prepending `PWDEBUG=1 ` to the command. Remind the user to click the "play" icon in Playwright inspector window for tests to actually start running.
 
-### Troubleshooting
+## Code Generation
+
+As per our "Automation over discipline" philosophy, we want to do as much as possible automatically. We use `make codegen` to generate objects from `openapi.yaml` instead of hardcoding them in our codebase, and then relying on discipline to keep them up to date.
+
+* Never edit these files manually.
+* If you change `openapi.yaml`, remember to run `make codegen` to update the generated files.
+* CI runs `make codegen` + `uncommitted-changes` to catch drift.
+* `make codegen` does NOT regenerate `frontend/src/Api/Data.elm` — that requires `nix-shell` (which runs `openapi-generator-cli`).
+
+## Troubleshooting
 
 ### DB manipulation in `pshell`
 
@@ -111,7 +120,7 @@ https://github.com/zupo/dotfiles/commit/81f34f0f4a0db7a851bfbd789dbf1c8ea309e58a
 
 ## Playwright browsers missing
 
-If you see an error like this: 
+If you see an error like this:
 
 ```
 E           playwright._impl._errors.Error: BrowserType.launch: Executable doesn't exist at /nix/store/bzq4f173df781lbb4zg2jykddhckj7mh-playwright-browsers/chromium-1200/chrome-mac-arm64/Google Chrome for Testing.app/Contents/MacOS/Google Chrome for Testing
