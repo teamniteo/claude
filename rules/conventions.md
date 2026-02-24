@@ -66,7 +66,7 @@ Every commit message should end with one or multiple lines of `Refs #<issue-numb
 
 Commit titles should be limited to 50 characters and other lines to 72 characters. This is not a hard limit, if it makes sense, you can break it.
 
-If there is additional cleanup included in the commit, add it to the body like so: 
+If there is additional cleanup included in the commit, add it to the body like so:
 
 ```
 Also:
@@ -87,7 +87,7 @@ We have a template for writing stories in `.github/ISSUE_TEMPLATE/user-story.md`
 
 ### Pull Requests
 
-If a Pull Request includes a single commit, it should match the commit message exactly. 
+If a Pull Request includes a single commit, it should match the commit message exactly.
 
 If a Pull Request includes multiple commits, chose which commit is the "main" one and use that commit as the title of the Pull Request. Add titles of the other commits to the Pull Request body like so:
 
@@ -102,4 +102,19 @@ Also:
 
 After finishing your work, look for `documentation/` and `frontend/static/documentation/` folders. These contain our documentation. If applicable, update them based on the work you have just performed.
 
-Also update any README.md files you encounter, if applicable. 
+Also update any README.md files you encounter, if applicable.
+
+## Enums
+
+Enums should have standardized values across the stack: snake_case in Python and Postgres, camelCase in API JSON and Elm, human-readable labels via `x-labels`.
+
+In Python:
+
+* <enum>.name: snake_case, for DB storage, Python code, logging, metrics.
+* <enum>.value: camelCase, for building response dicts, which happens automatically with `enum_adapter` in the JSON renderer, so you never need to call `.value` directly.
+* <enum>.label: human-readable, for auditlog messages, emails, PDF/CVS exports.
+
+In Elm:
+
+* type constructors: for Elm code
+* label functions: <enum>Label, for UI display
