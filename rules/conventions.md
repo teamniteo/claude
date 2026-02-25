@@ -19,6 +19,7 @@
 - Whenever we have a multiline list in a config file, alphabetically sort it.
 - Always ask clarifying questions when there are multiple valid approaches to a task.
 - Run `make check` after editing to ensure code style compliance.
+- When using camelCase, treat abbreviations just like ordinary words (e.g., `getHttpUrl` not `getHTTPURL`, `parseJsonApi` not `parseJSONAPI`).
 
 ## Comments
 
