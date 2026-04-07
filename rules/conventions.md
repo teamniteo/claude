@@ -88,16 +88,16 @@ We have a template for writing stories in `.github/ISSUE_TEMPLATE/user-story.md`
 
 ### Pull Requests
 
-If a Pull Request includes a single commit, it should match the commit message exactly.
-
-If a Pull Request includes multiple commits, chose which commit is the "main" one and use that commit as the title of the Pull Request. Add titles of the other commits to the Pull Request body like so:
-
+PR body = commit message body. Nothing else. No ## Summary, no ## Test plan, no rephrasing. For a single-commit PR, copy the commit message verbatim. For a multi-commit PR, copy the main commit's message verbatim and append an `Also:` block listing the other commit titles, like so:
+  
 ```
 Also:
 - add X
 - refactor Y
 - document Z
 ```
+
+If you find yourself writing a section heading in a PR body, stop — you're doing it wrong. 
 
 ## Documentation
 
