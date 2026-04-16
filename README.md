@@ -8,6 +8,46 @@ Projects use `rules/` from this repo in their work folders to tell Claude how ou
 
 Any project-specific instructions are added to the project's own `CLAUDE.md`.
 
+### Example
+
+Projects pin this repo as a flake input and symlink `rules/` and `skills/` into `.claude/` from their devShell.
+
+1. Add this repo as a flake input (`nix/flake.nix`):
+
+   ```nix
+   inputs.niteo-claude.url = "github:teamniteo/claude";
+   ```
+
+2. Fetch it as a source (`nix/default.nix`):
+
+   ```nix
+   niteoClaudeNode = flakeLock.nodes.${flakeLock.nodes.root.inputs.niteo-claude};
+
+   flakeSources.niteo-claude = builtins.fetchTarball {
+     url = "https://github.com/teamniteo/claude/archive/${niteoClaudeNode.locked.rev}.tar.gz";
+     sha256 = niteoClaudeNode.locked.narHash;
+   };
+   ```
+
+3. Symlink `rules/` and `skills/` into `.claude/` from the devShell's `shellHook`:
+
+   ```nix
+   shellHook = ''
+     mkdir -p "$PROJECT_ROOT/.claude"
+     ln -sfn ${pkgs.flakeSources.niteo-claude}/rules  "$PROJECT_ROOT/.claude/rules"
+     ln -sfn ${pkgs.flakeSources.niteo-claude}/skills "$PROJECT_ROOT/.claude/skills"
+   '';
+   ```
+
+4. Reference the shared rules from the project's `CLAUDE.md`:
+
+   ```markdown
+   Make sure to use common @.claude/rules/tooling.md and follow the
+   @.claude/rules/conventions.md when working in this repo.
+   ```
+
+Bump the shared config project-wide with `nix flake update niteo-claude`.
+
 ## Niteans
 
 Niteans use skills and MCPs from this repo in their HomeManager setup of Claude,
