@@ -71,12 +71,7 @@ Because we use HomeManager to manage Claude Code, we don't need to use [Plugins]
 
 
 TODO:
-* how to run playwright, with PWDEBUG
-* how to run a single unit test
-* keep 100% test coverage
 * Keep SKILL.md under 500 lines for optimal performance. If your content exceeds this, split detailed reference material into separate files.
-* prepend all commit messages with fix, feature, cleanup, chore, ...
-    -> can we have a pre-commit check for this?
 * https://code.claude.com/docs/en/hooks-guide#custom-notification-hook
 * Query production databases: heroku config | grep DATABASE_READONLY_URL to get connection string, then claude mcp add --transport stdio db -- npx -y @bytebase/dbhub \
   --dsn "<connection string>"
@@ -87,12 +82,8 @@ TODO:
 * https://code.claude.com/docs/en/statusline
 * forceLoginMethod
 * https://code.claude.com/docs/en/memory#claude-md-imports
-* branch name conventions
 * https://github.com/roman/mcps.nix
-* https://docs.customer.io/ai/mcp-server/
 * https://github.com/anthropics/claude-plugins-official/blob/main/plugins/code-simplifier/agents/code-simplifier.md
 * https://github.com/anthropics/claude-plugins-official/tree/main/plugins/commit-commands/commands
-* https://github.com/anthropics/claude-plugins-official/blob/main/plugins/code-review/commands/code-review.md
 * slack mcp
 * agentsDir = "${claude-plugins}/plugins/code-simplifier/agents";
-* document OpenAPI glue between backend and frontend
