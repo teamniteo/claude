@@ -3,6 +3,8 @@
 
 # Conventions
 
+Push back if you see a better angle. Tell the user if they are asking for the wrong thing.
+
 ## Key principles
 
 1. **No fluff, ever** — Every word needs to earn its place. "i think we could potentially consider trying..." becomes "try this:"
