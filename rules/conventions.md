@@ -80,7 +80,7 @@ NEVER append "Authored by Claude Code" to commit messages.
 
 ### User Stories
 
-We have a template for writing stories in `.github/ISSUE_TEMPLATE/user-story.md`. Always follow this template when creating new issues.
+We have a template for writing stories in `.github/ISSUE_TEMPLATE/user-story.md`. Always follow this template when creating new issues. Always ask before creating an issue and posting it to GitHub.
 
 - NEVER change the template!
 - Only every use existing labels, never create new labels.
