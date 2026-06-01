@@ -107,7 +107,7 @@ Before committing:
 
 - **Title**: same as the source PR's title.
 - **Body**: start from the source (main) PR's body verbatim. Then:
-  - Keep any `Refs #N` / `Fixes #N` / `Closes #N` lines from the source PR **as-is** — these reference issues in project B and stay pointing there.
+  - Keep any `Refs #N` / `Fixes #N` / `Closes #N` lines from the source PR **as-is** — these reference issues in project B and stay pointing there. Make sure to prefix them with `mayetrx/trak` or `mayetrx/vend` as applicable, so they correctly reference the original.
   - Append a `Port of <full URL of the main source PR>` line.
   - If there are follow-up PRs being ported alongside, append an `Also,` section with one bullet per follow-up summarizing what it added or changed:
 
