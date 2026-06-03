@@ -37,13 +37,24 @@ buildPythonApplication rec {
 
   build-system = [ hatchling ];
 
-  # imagesorcery hardcodes its log file next to its own source location, which
-  # is the read-only Nix store. Redirect to an XDG-style user state directory.
+  # imagesorcery assumes it runs from a writable source checkout: it hardcodes
+  # its log file next to its own source location, and on startup chdirs into
+  # that source root to create config.toml / models / .env there. Under Nix
+  # that location is the read-only store, so redirect both to XDG-style
+  # per-user directories.
   postPatch = ''
     substituteInPlace src/imagesorcery_mcp/logging_config.py \
       --replace-fail \
         'LOG_FILE = os.path.join(os.path.dirname(os.path.abspath(__file__)), "logs", "imagesorcery.log")' \
         'LOG_FILE = os.path.join(os.environ.get("XDG_STATE_HOME", os.path.expanduser("~/.local/state")), "imagesorcery-mcp", "imagesorcery.log")'
+
+    substituteInPlace src/imagesorcery_mcp/server.py \
+      --replace-fail \
+        'project_root = Path(__file__).parent.parent.parent
+os.chdir(project_root)' \
+        'project_root = Path(os.environ.get("XDG_DATA_HOME", os.path.expanduser("~/.local/share"))) / "imagesorcery-mcp"
+project_root.mkdir(parents=True, exist_ok=True)
+os.chdir(project_root)'
   '';
 
   dependencies = [
