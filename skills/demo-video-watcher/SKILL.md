@@ -5,13 +5,13 @@ argument-hint: "<GitHub comment URL or video attachment URL>"
 allowed-tools:
   - Bash(curl *)
   - Bash(file *)
+  - Bash(gh api*)
+  - Bash(gh auth token*)
   - Bash(ls *)
   - Bash(mkdir *)
   - Bash(nix-shell *)
   - Glob
   - Read
-  - mcp__github__issue_read
-  - mcp__github__pull_request_read
 
 ---
 
@@ -26,9 +26,11 @@ showing the implemented feature.
 Parse `$ARGUMENTS` to extract a video URL. Accept:
 
 - GitHub comment URL: `https://github.com/<owner>/<repo>/issues/<n>#issuecomment-<id>`
-  — fetch the comment via `mcp__github__issue_read` (method: `get_comments`) to find the video attachment URL.
+  — fetch the comment body to find the video attachment URL with
+  `gh api repos/<owner>/<repo>/issues/comments/<id> --jq '.body'`.
 - GitHub PR comment URL: `https://github.com/<owner>/<repo>/pull/<n>#issuecomment-<id>`
-  — fetch via `mcp__github__pull_request_read` (method: `list_comments`) to find the video attachment URL.
+  — `#issuecomment-<id>` is an issue comment even on a PR, so use the same
+  endpoint: `gh api repos/<owner>/<repo>/issues/comments/<id> --jq '.body'`.
 - Direct video URL: `https://github.com/user-attachments/assets/<uuid>`
 
 If `$ARGUMENTS` is empty, use `AskUserQuestion` to ask for the URL.
@@ -40,7 +42,7 @@ If `$ARGUMENTS` is empty, use `AskUserQuestion` to ask for the URL.
 GitHub user-attachment URLs require authentication. Download with:
 
 ```bash
-curl -sL -H "Authorization: token $GITHUB_PERSONAL_ACCESS_TOKEN" \
+curl -sL -H "Authorization: token $(gh auth token)" \
   -o /tmp/demo-video.mp4 "<VIDEO_URL>"
 ```
 
