@@ -73,9 +73,18 @@
           "mcp__help-scout__*"
         ];
 
-        mcpPackages = pkgs: {
-          help-scout-mcp-server = pkgs.callPackage ./pkgs/by-name/he/help-scout-mcp-server/package.nix { };
-        };
+        mcpPackages =
+          pkgs:
+          let
+            fastmcp = pkgs.python3Packages.callPackage ./pkgs/by-name/fa/fastmcp/package.nix { };
+          in
+          {
+            help-scout-mcp-server = pkgs.callPackage ./pkgs/by-name/he/help-scout-mcp-server/package.nix { };
+            inherit fastmcp;
+            imagesorcery-mcp = pkgs.python3Packages.callPackage ./pkgs/by-name/im/imagesorcery-mcp/package.nix {
+              inherit fastmcp;
+            };
+          };
 
         mcpServers = pkgs: {
 
@@ -132,8 +141,7 @@
           };
 
           imagesorcery-mcp = {
-            command = "${pkgs.uv}/bin/uvx";
-            args = [ "imagesorcery-mcp" ];
+            command = "${(self.lib.mcpPackages pkgs).imagesorcery-mcp}/bin/imagesorcery-mcp";
           };
 
           # Requires HELPSCOUT_APP_ID and HELPSCOUT_APP_SECRET in environment
