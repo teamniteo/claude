@@ -4,15 +4,15 @@ description: Port a feature or fix from a PR in a sister project to the current 
 argument-hint: "<source PR URL> [<additional PR URL> ...]"
 allowed-tools:
   - AskUserQuestion
+  - Bash(gh issue view*)
+  - Bash(gh pr diff*)
+  - Bash(gh pr view*)
   - Bash(git *)
   - Edit
   - Glob
   - Grep
   - Read
   - Write
-  - mcp__github__pull_request_read
-  - mcp__github__issue_read
-  - mcp__github__get_file_contents
 
 ---
 
@@ -35,10 +35,10 @@ If `$ARGUMENTS` is empty, use `AskUserQuestion` to ask for the source PR URL.
 
 For each PR (the main one and each follow-up, in order):
 
-1. Use `mcp__github__pull_request_read` (method: `get`) to fetch metadata (title, body, base/head SHAs, merge state).
-2. Use `mcp__github__pull_request_read` (method: `get_files`) to list changed files.
-3. Use `mcp__github__pull_request_read` (method: `get_diff`) to read the full diff.
-4. If the PR body references issues (`Refs #N`, `Fixes #N`, `Closes #N`), read those with `mcp__github__issue_read` to capture the *intent* of the change.
+1. Run `gh pr view <number> --repo <owner>/<repo> --json title,body,baseRefName,headRefName,headRefOid,state,mergeStateStatus` to fetch metadata.
+2. Run `gh pr view <number> --repo <owner>/<repo> --json files --jq '.files[].path'` to list changed files.
+3. Run `gh pr diff <number> --repo <owner>/<repo>` to read the full diff.
+4. If the PR body references issues (`Refs #N`, `Fixes #N`, `Closes #N`), read those with `gh issue view <N> --repo <owner>/<repo> --comments` to capture the *intent* of the change.
 
 Combine the diffs of all PRs into one logical changeset. If a follow-up PR reverts or modifies a hunk from the main PR, the **net** result is what gets ported — don't replay both.
 

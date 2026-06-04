@@ -42,6 +42,13 @@
 
         # Allow ~safe read-only operations by default
         permissions.allow = [
+          "Bash(gh auth token*)"
+          "Bash(gh issue list*)"
+          "Bash(gh issue view*)"
+          "Bash(gh pr diff*)"
+          "Bash(gh pr list*)"
+          "Bash(gh pr view*)"
+          "Bash(gh search*)"
           "Bash(git branch*)"
           "Bash(git diff*)"
           "Bash(git log*)"
@@ -63,7 +70,6 @@
           "WebSearch"
           "mcp__cloudflare-docs__*"
           "mcp__customerio__*"
-          "mcp__github__*"
           "mcp__heroku__*"
           "mcp__mcp-grafana__*"
           "mcp__mcp-nixos__*"
@@ -91,16 +97,6 @@
           cloudflare-docs = {
             type = "http";
             url = "https://docs.mcp.cloudflare.com/mcp";
-          };
-
-          # Local server with PAT because remote OAuth broken in Claude Code:
-          # https://github.com/anthropics/claude-code/issues/3433
-          github = {
-            command = "${pkgs.github-mcp-server}/bin/github-mcp-server";
-            args = [ "stdio" ];
-            env = {
-              GITHUB_PERSONAL_ACCESS_TOKEN = "\${GITHUB_PERSONAL_ACCESS_TOKEN}";
-            };
           };
 
           # Login with `heroku login`

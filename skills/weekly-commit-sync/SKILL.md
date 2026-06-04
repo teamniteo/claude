@@ -10,15 +10,13 @@ allowed-tools:
   - Bash(ls *)
   - Bash(test *)
   - Bash(jq *)
-  - Bash(gh *)
+  - Bash(gh pr diff*)
+  - Bash(gh pr list*)
+  - Bash(gh pr view*)
   - Glob
   - Grep
   - Read
   - Skill(port)
-  - mcp__github__list_pull_requests
-  - mcp__github__pull_request_read
-  - mcp__github__search_pull_requests
-  - mcp__github__get_file_contents
 
 ---
 
@@ -78,9 +76,9 @@ The two directions (`<repo-B>` → `<repo-A>` and `<repo-A>` → `<repo-B>`) are
 
 > You are listing PRs merged in `<source-owner>/<source-repo>` between `<window-start ISO>` and `<window-end ISO>` UTC and classifying each by exact match against `<target-owner>/<target-repo>`'s history.
 >
-> **Step 1 — list source PRs in window.** Use `mcp__github__list_pull_requests` (state: `closed`) on `<source-owner>/<source-repo>`, paginating until you've passed the window. Keep only PRs whose `merged_at` falls inside the window. Drop unmerged closed PRs. **Skip bots** (any author with `[bot]` in the login).
+> **Step 1 — list source PRs in window.** Run `gh pr list --repo <source-owner>/<source-repo> --state merged --search "merged:<window-start>..<window-end>" --limit 200 --json number,title,url,author,mergedAt`. Keep only PRs whose `mergedAt` falls inside the window. **Skip bots** (any author with `[bot]` in the login or `author.is_bot == true`).
 >
-> **Step 2 — list open ports in target.** Use `mcp__github__list_pull_requests` (state: `open`) on `<target-owner>/<target-repo>`. For each open PR, scan its body for `Port of https://github.com/<source-owner>/<source-repo>/pull/<N>` lines and build a map `source_url → {target_pr_number, target_pr_url}`.
+> **Step 2 — list open ports in target.** Run `gh pr list --repo <target-owner>/<target-repo> --state open --limit 200 --json number,url,body`. For each open PR, scan its body for `Port of https://github.com/<source-owner>/<source-repo>/pull/<N>` lines and build a map `source_url → {target_pr_number, target_pr_url}`.
 >
 > **Step 3 — classify each source PR.** Apply in order; stop at first match:
 >
@@ -119,10 +117,9 @@ If one direction has zero missing PRs, skip its emissions and run only the other
 > **Source PR**: `<source PR URL>` (in `<source-owner>/<source-repo>`)
 > **Target**: `<target-owner>/<target-repo>` (local checkout at `<target-path>`, default branch `<target-default-branch>`)
 >
-> **Step 1 — fetch the PR.** Use `mcp__github__pull_request_read`:
-> - method `get` for title, body, intent.
-> - method `get_diff` for the full diff.
-> - method `get_files` for file paths + statuses (`added` / `modified` / `renamed` / `removed`).
+> **Step 1 — fetch the PR.** Use `gh`:
+> - `gh pr view <N> --repo <source-owner>/<source-repo> --json title,body` for title, body, intent.
+> - `gh pr diff <N> --repo <source-owner>/<source-repo>` for the full diff. Derive each file's status from the diff headers: `new file mode` → `added`, `deleted file mode` → `removed`, `rename from`/`rename to` → `renamed`, otherwise `modified`.
 >
 > **Step 2 — assess against target.**
 >

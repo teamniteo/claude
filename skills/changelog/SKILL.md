@@ -4,16 +4,15 @@ description: Generate a weekly changelog entry and prepend it to documentation/c
 argument-hint: "<YYYY-MM-DD Monday date, e.g. 2025-03-03>"
 allowed-tools:
   - AskUserQuestion
+  - Bash(gh issue view*)
+  - Bash(gh pr list*)
+  - Bash(gh pr view*)
   - Bash(git *)
   - Edit
   - Glob
   - Grep
   - Read
   - Skill(demo-video-watcher)
-  - mcp__github__issue_read
-  - mcp__github__list_commits
-  - mcp__github__pull_request_read
-  - mcp__github__search_pull_requests
 
 ---
 
@@ -32,11 +31,11 @@ Generate a changelog entry for a specific week and prepend it to `documentation/
    git log --oneline --format="%H %s" --after="<monday>T12:00:00Z" --before="<next-monday>T12:00:00Z" origin/main
    ```
 4. **Filter commits**: Keep only commits with `feat:` or `fix:` prefixes. Discard `chore:` and everything else.
-5. **Match commits to PRs**: For each commit, extract the PR number from `(#N)` in the commit message. If not found, use the GitHub MCP `search_pull_requests` tool to find the PR.
+5. **Match commits to PRs**: For each commit, extract the PR number from `(#N)` in the commit message. If not found, run `gh pr list --search "<sha>" --state merged --json number,title` to find the PR.
 6. **Read PRs and linked issues**: For each PR:
-   - Use GitHub MCP `pull_request_read` to read the PR body and comments
+   - Run `gh pr view <N> --comments` to read the PR body and comments
    - Extract `Refs #N` references to find linked issues
-   - Use GitHub MCP `issue_read` to read linked issues and their comments
+   - Run `gh issue view <N> --comments` to read linked issues and their comments
 7. **Watch demo videos**: If any issue or PR comments contain video attachments, invoke the `/demo-video-watcher` skill on them to understand what the feature does.
 8. **Generate the entry**: Create a markdown entry in this format:
 

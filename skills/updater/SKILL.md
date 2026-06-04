@@ -5,21 +5,22 @@ argument-hint: "<owner>/<repo>#<PR number> or GitHub PR URL"
 allowed-tools:
   - AskUserQuestion
   - Bash(cat *)
+  - Bash(gh api*)
+  - Bash(gh pr comment*)
+  - Bash(gh pr diff*)
+  - Bash(gh pr view*)
   - Bash(git diff*)
   - Bash(git log*)
   - Bash(git remote*)
   - Bash(grep *)
   - Bash(head *)
-  - Bash(jq *)
   - Bash(python3 *)
   - Glob
   - Grep
   - Read
   - WebFetch
   - WebSearch
-  - mcp__github__add_issue_comment
-  - mcp__github__get_file_contents
-  - mcp__github__pull_request_read
+  - Write
 
 ---
 
@@ -47,12 +48,20 @@ the PR URL or number.
 
 <read-pr>
 
-DO NOT: use `gh` commands. Use MCP instead:
+Use `gh` for all GitHub reads. Pass `--repo <owner>/<repo>` explicitly so the
+commands work regardless of the current directory.
 
-Use `mcp__github__pull_request_read` (method: `get`) to fetch PR metadata.
+Fetch PR metadata:
 
-Use `mcp__github__pull_request_read` (method: `get_files`) to list changed
-files. Classify the ecosystem:
+```bash
+gh pr view <number> --repo <owner>/<repo> --json title,body,state,url
+```
+
+List changed files and classify the ecosystem:
+
+```bash
+gh pr view <number> --repo <owner>/<repo> --json files --jq '.files[].path'
+```
 
 | Files changed | Ecosystem |
 |---|---|
@@ -66,30 +75,25 @@ A single PR may touch multiple ecosystems. Handle each.
 
 <extract-versions>
 
-Use `mcp__github__pull_request_read` (method: `get_diff`) to get the PR diff.
-
-If the diff is too large and gets saved to a JSON temp file, use the parser
-scripts in `~/.claude/skills/updater/utils/`. Each script reads raw diff
-text from stdin and outputs `package old_version new_version` per line.
-
-Extract the diff text and pipe to the appropriate parser:
+Get the PR diff and pipe it straight into the appropriate parser. `gh pr diff`
+streams the raw unified diff to stdout, so no temp files or `jq` extraction are
+needed. Each parser in `~/.claude/skills/updater/utils/` reads raw diff text
+from stdin and outputs `package old_version new_version` per line.
 
 **Python / uv** (`uv.lock`):
 ```bash
-jq -r '.[0].text' <temp_file> | python3 ~/.claude/skills/updater/utils/parse_uv_diff.py
+gh pr diff <number> --repo <owner>/<repo> | python3 ~/.claude/skills/updater/utils/parse_uv_diff.py
 ```
 
 **Nix flakes** (`flake.lock`):
 ```bash
-jq -r '.[0].text' <temp_file> | python3 ~/.claude/skills/updater/utils/parse_flake_diff.py
+gh pr diff <number> --repo <owner>/<repo> | python3 ~/.claude/skills/updater/utils/parse_flake_diff.py
 ```
 
 **Node.js** (`package-lock.json` / `yarn.lock` / `bun.lock`):
 ```bash
-jq -r '.[0].text' <temp_file> | python3 ~/.claude/skills/updater/utils/parse_npm_diff.py
+gh pr diff <number> --repo <owner>/<repo> | python3 ~/.claude/skills/updater/utils/parse_npm_diff.py
 ```
-
-If the diff is small enough to be returned inline, parse it directly.
 
 Then identify **direct dependencies** by reading the manifest file:
 - Python: `pyproject.toml` — `[project.dependencies]`, `[dependency-groups]`
@@ -126,8 +130,11 @@ For each **direct** dependency update, find the changelog. Try in order:
    - Nix (other flake inputs): use the compare URL to `WebFetch` the GitHub
      comparison page and summarize actual changes. Don't just paste a link.
 
-3. **CHANGELOG file**: Use `mcp__github__get_file_contents` to read
-   `CHANGELOG.md`, `CHANGES.md`, or `HISTORY.md` from the package repo.
+3. **CHANGELOG file**: Read `CHANGELOG.md`, `CHANGES.md`, or `HISTORY.md`
+   from the package repo with:
+   ```bash
+   gh api repos/<owner>/<repo>/contents/<file> -H "Accept: application/vnd.github.raw"
+   ```
 
 4. **Web search**: `WebSearch` for `"<package> changelog <new_version>"`.
 
@@ -182,7 +189,11 @@ For each direct dependency with changelog findings:
 
 <output>
 
-Use `mcp__github__add_issue_comment` to post the comment to the PR.
+Write the formatted comment to a temp file, then post it to the PR:
+
+```bash
+gh pr comment <number> --repo <owner>/<repo> --body-file /tmp/renovate-comment.md
+```
 
 Group packages by the file they came from. Do not list the full path of the files. Use the format defined in `~/.claude/skills/updater/templates/FORMAT.md`. 
 
