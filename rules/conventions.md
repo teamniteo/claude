@@ -15,6 +15,19 @@ Push back if you see a better angle. Tell the user if they are asking for the wr
 6. **Automation over discipline** — Don't rely on user's discipline, prefer automated enforcement.
 7. **DRY tests, WET code** — DRY in code is bad, but DRY in tests is good.
 
+## Write less code
+
+The best code is the code never written. Before writing any, stop at the first rung that holds:
+
+1. Does this need to be built at all? (YAGNI)
+2. Does the standard library already do it? Use it.
+3. Does a native platform feature cover it? Use it.
+4. Does an already-installed dependency solve it? Use it.
+5. Can it be one line? Make it one line.
+6. Only then: write the minimum code that works.
+
+Lazy means efficient, not careless. Deletion over addition, boring over clever, fewest files possible. Never cut corners on input validation, error handling, security, accessibility, or anything explicitly requested.
+
 ## Code Style
 
 - Follow existing code style in the file being edited. Read similar files to learn how things are done.
