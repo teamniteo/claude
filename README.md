@@ -50,8 +50,7 @@ Bump the shared config project-wide with `nix flake update niteo-claude`.
 
 ## Niteans
 
-Niteans use skills and MCPs from this repo in their HomeManager setup of Claude,
-so that it gains Niteo-specific capabilities.
+Niteans use skills and MCPs from this repo in their HomeManager setup of Claude, so that it gains Niteo-specific capabilities.
 
 Niteans are free to expand with their personal tooling or preferences, and are encouraged to generalize and contribute back to this repo for other Niteans to benefit.
 

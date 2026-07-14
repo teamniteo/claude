@@ -11,15 +11,11 @@ Use the following plugins when working on user's tasks:
 - code-review
 - sentry
 
-If any of these Plugins is not available, ask the user to install and update
-the official plugins marketplace.
+If any of these Plugins is not available, ask the user to install and update the official plugins marketplace.
 
 ## GitHub
 
-Use the `gh` CLI for all GitHub operations — reading PRs and issues, fetching
-diffs, reading file contents from remote repos, and posting comments. It is
-already authenticated. Prefer `gh` (and `gh api` for anything not covered by a
-subcommand) over hitting the GitHub REST API by hand.
+Use the `gh` CLI for all GitHub operations — reading PRs and issues, fetching diffs, reading file contents from remote repos, and posting comments. It is already authenticated. Prefer `gh` (and `gh api` for anything not covered by a subcommand) over hitting the GitHub REST API by hand.
 
 ## MCP Servers
 
