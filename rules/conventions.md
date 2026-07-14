@@ -40,8 +40,7 @@ Lazy means efficient, not careless. Deletion over addition, boring over clever, 
 
 Code should be self-documenting, expressing the truth rather than pointing to its source. If a comment is needed to explain **what** the code does, consider refactoring the code to make its intent clearer instead of adding the comment.
 
-Comments are only acceptable when they explain WHY something is done a certain way,
-and should include a link to the GitHub issue or comment that explains the reasoning.
+Comments are only acceptable when they explain WHY something is done a certain way, and should include a link to the GitHub issue or comment that explains the reasoning.
 
 ### Unacceptable Comments
 - Comments that repeat what code does
@@ -49,6 +48,10 @@ and should include a link to the GitHub issue or comment that explains the reaso
 - Obvious comments ("increment counter")
 - Comments instead of good naming
 - Comments about updates to old code ("<- now supports xyz")
+
+## Markdown
+
+Never hard-wrap prose in Markdown files. Write each paragraph as a single line and let the editor soft-wrap. Hard wraps make diffs noisy — a one-word edit reflows the whole paragraph.
 
 ## git
 
@@ -112,7 +115,9 @@ Also:
 - document Z
 ```
 
-If you find yourself writing a section heading in a PR body, stop — you're doing it wrong. 
+Unwrap it, though: commit bodies hard-wrap at 72 characters, but a PR body renders as Markdown, so join each wrapped paragraph back onto a single line. Verbatim in words, not in line breaks.
+
+If you find yourself writing a section heading in a PR body, stop — you're doing it wrong.
 
 ## Documentation
 
