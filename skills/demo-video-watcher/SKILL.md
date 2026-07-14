@@ -17,20 +17,14 @@ allowed-tools:
 
 # Demo Video Watcher
 
-Extract context from demo videos linked in GitHub issues or PR comments.
-These are typically User Story demos — screen recordings with narration
-showing the implemented feature.
+Extract context from demo videos linked in GitHub issues or PR comments. These are typically User Story demos — screen recordings with narration showing the implemented feature.
 
 <parse-input>
 
 Parse `$ARGUMENTS` to extract a video URL. Accept:
 
-- GitHub comment URL: `https://github.com/<owner>/<repo>/issues/<n>#issuecomment-<id>`
-  — fetch the comment body to find the video attachment URL with
-  `gh api repos/<owner>/<repo>/issues/comments/<id> --jq '.body'`.
-- GitHub PR comment URL: `https://github.com/<owner>/<repo>/pull/<n>#issuecomment-<id>`
-  — `#issuecomment-<id>` is an issue comment even on a PR, so use the same
-  endpoint: `gh api repos/<owner>/<repo>/issues/comments/<id> --jq '.body'`.
+- GitHub comment URL: `https://github.com/<owner>/<repo>/issues/<n>#issuecomment-<id>` — fetch the comment body to find the video attachment URL with `gh api repos/<owner>/<repo>/issues/comments/<id> --jq '.body'`.
+- GitHub PR comment URL: `https://github.com/<owner>/<repo>/pull/<n>#issuecomment-<id>` — `#issuecomment-<id>` is an issue comment even on a PR, so use the same endpoint: `gh api repos/<owner>/<repo>/issues/comments/<id> --jq '.body'`.
 - Direct video URL: `https://github.com/user-attachments/assets/<uuid>`
 
 If `$ARGUMENTS` is empty, use `AskUserQuestion` to ask for the URL.
@@ -91,11 +85,9 @@ nix-shell -p ffmpeg --run \
   "ffmpeg -i /tmp/demo-video.mp4 -vf 'fps=1' -q:v 2 /tmp/demo-frames/frame_%03d.jpg"
 ```
 
-Use `fps=0.5` for longer videos (> 60s) or `fps=2` for short ones (< 10s)
-where detail matters.
+Use `fps=0.5` for longer videos (> 60s) or `fps=2` for short ones (< 10s) where detail matters.
 
-View frames with the Read tool. Start with a sample (every 5th frame) to
-get an overview, then fill in gaps if needed.
+View frames with the Read tool. Start with a sample (every 5th frame) to get an overview, then fill in gaps if needed.
 
 </extract-frames>
 

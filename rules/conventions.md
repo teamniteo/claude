@@ -68,9 +68,7 @@ The prefix can be one of the following:
 - `fix`: for bug fixes
 - `chore`: other
 
-If the branch contains a `chore` and a `fix` commit, use `fix` as the prefix.
-If the branch contains a `chore` and a `feat` commit, use `feat` as the prefix.
-If the branch contains a `fix` and a `feat` commit, use `feat` as the prefix.
+If the branch contains a `chore` and a `fix` commit, use `fix` as the prefix. If the branch contains a `chore` and a `feat` commit, use `feat` as the prefix. If the branch contains a `fix` and a `feat` commit, use `feat` as the prefix.
 
 ### Commit message convention
 
