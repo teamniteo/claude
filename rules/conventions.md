@@ -38,7 +38,7 @@ Lazy means efficient, not careless. Deletion over addition, boring over clever, 
 
 ## Comments
 
-Code should be self-documenting. If you need a comment to explain WHAT the code does, consider refactoring to make it clearer instead of adding a comment.
+Code should be self-documenting, expressing the truth rather than pointing to its source. If a comment is needed to explain **what** the code does, consider refactoring the code to make its intent clearer instead of adding the comment.
 
 Comments are only acceptable when they explain WHY something is done a certain way,
 and should include a link to the GitHub issue or comment that explains the reasoning.
