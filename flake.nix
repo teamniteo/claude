@@ -83,12 +83,21 @@
           pkgs:
           let
             fastmcp = pkgs.python3Packages.callPackage ./pkgs/by-name/fa/fastmcp/package.nix { };
+
+            # ultralytics' test_data_utils downloads a dataset that upstream
+            # deleted (HTTP 404). Sandboxed builds skip it as offline, but
+            # builds with network access (e.g. darwin with sandbox=false) run
+            # it and fail. Fixed upstream in ultralytics 8.4.62; drop this
+            # override once nixpkgs ships that or newer.
+            ultralytics = pkgs.python3Packages.ultralytics.overridePythonAttrs (old: {
+              disabledTests = (old.disabledTests or [ ]) ++ [ "test_data_utils" ];
+            });
           in
           {
             help-scout-mcp-server = pkgs.callPackage ./pkgs/by-name/he/help-scout-mcp-server/package.nix { };
             inherit fastmcp;
             imagesorcery-mcp = pkgs.python3Packages.callPackage ./pkgs/by-name/im/imagesorcery-mcp/package.nix {
-              inherit fastmcp;
+              inherit fastmcp ultralytics;
             };
           };
 
