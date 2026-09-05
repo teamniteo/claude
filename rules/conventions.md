@@ -92,6 +92,8 @@ Also:
 - remove Z
 ```
 
+Describe the change, not its history. No references to past implementations, earlier bugs, or what the code used to do — we don't host legacy versions and we clean up as we go, so the old state is noise to whoever reads this next.
+
 NEVER append "Authored by Claude Code" to commit messages.
 
 ### User Stories
