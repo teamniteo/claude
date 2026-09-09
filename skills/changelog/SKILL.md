@@ -60,4 +60,4 @@ Guidelines for writing entries:
 - If a commit included an update to /documentation, link to the updated documentation page.
 
 9. **Insert the entry**: Use the Edit tool to insert the generated entry immediately after the `<!-- changelog-insert-marker -->` line in `documentation/changelog.md`.
-10. **Show the result**: Display the generated entry to the user for review. Do not commit — let the user decide.
+10. **Show the result**: Display the generated entry to the user for review. Do not commit — let the user decide. Append `Refs https://github.com/mayetrx/trak/issues/280` once you are ready to commit.
