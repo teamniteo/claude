@@ -17,6 +17,8 @@ If any of these Plugins is not available, ask the user to install and update the
 
 Use the `gh` CLI for all GitHub operations — reading PRs and issues, fetching diffs, reading file contents from remote repos, and posting comments. It is already authenticated. Prefer `gh` (and `gh api` for anything not covered by a subcommand) over hitting the GitHub REST API by hand.
 
+On shared hosts such as cruncher, `gh` is not logged in. The SSH session carries fine-grained PATs as environment variables instead: `GH_TOKEN_TEAMNITEO` (also copied to `GH_TOKEN`, so plain `gh` works for teamniteo repos) and `GH_TOKEN_MAYETRX`. For repositories in the mayetrx organization, prefix the command: `GH_TOKEN=$GH_TOKEN_MAYETRX gh ...`. If the variables are missing, ask the user to reconnect with the tokens pushed into the session. Never run `gh auth login` there and never print, log, or write the tokens anywhere. `git push` goes over SSH through the forwarded agent and needs no token.
+
 ## MCP Servers
 
 - **Cloudflare Docs**: Provides up-to-date Cloudflare documentation.
