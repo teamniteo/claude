@@ -70,6 +70,8 @@ The prefix can be one of the following:
 
 If the branch contains a `chore` and a `fix` commit, use `fix` as the prefix. If the branch contains a `chore` and a `feat` commit, use `feat` as the prefix. If the branch contains a `fix` and a `feat` commit, use `feat` as the prefix.
 
+When working in a feature branch, always try to merge new work into the previous commits on this branch. 
+
 ### Commit message convention
 
 Each commit message should start with a type prefix, followed by a colon, a space, and an uppercase letter.
@@ -120,6 +122,8 @@ Unwrap it, though: commit bodies hard-wrap at 72 characters, but a PR body rende
 If you find yourself writing a section heading in a PR body, stop — you're doing it wrong.
 
 Always submit the PR as a draft.
+
+PRs should generally have only a single commit. Only if you are fixing something unrelated to the main PR work, put it into a separate commit.
 
 ## Documentation
 
