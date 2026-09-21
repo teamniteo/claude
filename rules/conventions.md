@@ -55,7 +55,7 @@ Never hard-wrap prose in Markdown files. Write each paragraph as a single line a
 
 ## git
 
-NEVER push directly to `main`. Always work on a feature branch and create a Pull Request. This rule has NO exceptions — not even for "quick fixes" or single commits.
+NEVER push directly to `main`. Always work on a feature branch and create a draft Pull Request. This rule has NO exceptions — not even for "quick fixes" or single commits.
 
 Before any work, always ask the user what GitHub Issue they are working on. Then check the current branch. If you are on `main`, ask the user which branch to checkout (list 5 most recent branches) or to create a new one. Propose the branch name based on the GitHub Issue that is being worked on. When creating a new branch, always base it off the latest `origin/main`.
 
@@ -118,6 +118,8 @@ Also:
 Unwrap it, though: commit bodies hard-wrap at 72 characters, but a PR body renders as Markdown, so join each wrapped paragraph back onto a single line. Verbatim in words, not in line breaks.
 
 If you find yourself writing a section heading in a PR body, stop — you're doing it wrong.
+
+Always submit the PR as a draft.
 
 ## Documentation
 
