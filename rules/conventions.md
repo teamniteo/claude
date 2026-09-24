@@ -115,7 +115,7 @@ Report the bug, not the fix. Keep every section short:
 - **Describe the bug**: two or three sentences on what is wrong.
 - **To reproduce**: the fewest steps that show it.
 - **Expected behavior**: one line.
-- **Additional context**: a `file:line` pointer and links to related issues, nothing more.
+- **Additional context**: Links to related issues/commits or Helpscout/Slack messages. Nothing more.
 
 No implementation plans, lists of files to change, or test and docs follow-ups: those belong in the PR that fixes it.
 
