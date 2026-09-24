@@ -106,6 +106,19 @@ We have a template for writing stories in `.github/ISSUE_TEMPLATE/user-story.md`
 - Only every use existing labels, never create new labels.
 - The last AC is always `- [ ] User Story demo is uploaded to this issue`.
 
+### Bug Reports
+
+We have a template for bug reports in `.github/ISSUE_TEMPLATE/bug-report.md`. Always follow it, and ask before posting to GitHub.
+
+Report the bug, not the fix. Keep every section short:
+
+- **Describe the bug**: two or three sentences on what is wrong.
+- **To reproduce**: the fewest steps that show it.
+- **Expected behavior**: one line.
+- **Additional context**: Links to related issues/commits or Helpscout/Slack messages. Nothing more.
+
+No implementation plans, lists of files to change, or test and docs follow-ups: those belong in the PR that fixes it.
+
 ### Pull Requests
 
 PR body = commit message body. Nothing else. No ## Summary, no ## Test plan, no rephrasing. For a single-commit PR, copy the commit message verbatim. For a multi-commit PR, copy the main commit's message verbatim and append an `Also:` block listing the other commit titles, like so:
