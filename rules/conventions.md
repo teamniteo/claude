@@ -112,7 +112,7 @@ We have a template for bug reports in `.github/ISSUE_TEMPLATE/bug-report.md`. Al
 
 Report the bug, not the fix. Keep every section short:
 
-- **Describe the bug**: one or two sentences on what is wrong.
+- **Describe the bug**: two or three sentences on what is wrong.
 - **To reproduce**: the fewest steps that show it.
 - **Expected behavior**: one line.
 - **Additional context**: a `file:line` pointer and links to related issues, nothing more.
