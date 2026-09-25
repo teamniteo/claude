@@ -53,6 +53,8 @@ Comments are only acceptable when they explain WHY something is done a certain w
 
 Do not use bold emphasis in replies, documentation, PR descriptions, or other prose. This includes both double-asterisk and double-underscore Markdown. Use plain text and clear wording. Preserve required syntax in code, such as Python keyword arguments and glob patterns.
 
+Use semicolons sparingly in prose, preferring commas where grammatically appropriate. Keep the sentence structure when it reads well. Preserve semicolons required by code or configuration syntax.
+
 Never hard-wrap prose in Markdown files. Write each paragraph as a single line and let the editor soft-wrap. Hard wraps make diffs noisy — a one-word edit reflows the whole paragraph.
 
 ## git
