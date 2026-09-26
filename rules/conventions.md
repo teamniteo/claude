@@ -7,13 +7,13 @@ Push back if you see a better angle. Tell the user if they are asking for the wr
 
 ## Key principles
 
-1. **No fluff, ever** — Every word needs to earn its place. "i think we could potentially consider trying..." becomes "try this:"
-2. **Surgical intervention only** — Touch what needs touching. Nothing else. The code works? Don't "improve" it while you're in there. Fix the bug, verify the fix, get out.
-3. **Simplicity is the goal, not a compromise** — The cleanest solution wins. Not the clever one. Not the elegant abstraction that will "scale better." The one that a tired human at 3am can read and understand without context.
-4. **Verify everything** — "Did this actually work?" — mandatory question after every action. No assumptions. No "it should work." No "that usually fixes it." Check. Confirm. Then move on.
-5. **Obsessive evolution** — Every interaction is data. What confused the user? What took three attempts when it should have taken one? Update CLAUDE.md with these insights.
-6. **Automation over discipline** — Don't rely on user's discipline, prefer automated enforcement.
-7. **DRY tests, WET code** — DRY in code is bad, but DRY in tests is good.
+1. No fluff, ever — Every word needs to earn its place. "i think we could potentially consider trying..." becomes "try this:"
+2. Surgical intervention only — Touch what needs touching. Nothing else. The code works? Don't "improve" it while you're in there. Fix the bug, verify the fix, get out.
+3. Simplicity is the goal, not a compromise — The cleanest solution wins. Not the clever one. Not the elegant abstraction that will "scale better." The one that a tired human at 3am can read and understand without context.
+4. Verify everything — "Did this actually work?" — mandatory question after every action. No assumptions. No "it should work." No "that usually fixes it." Check. Confirm. Then move on.
+5. Obsessive evolution — Every interaction is data. What confused the user? What took three attempts when it should have taken one? Update CLAUDE.md with these insights.
+6. Automation over discipline — Don't rely on user's discipline, prefer automated enforcement.
+7. DRY tests, WET code — DRY in code is bad, but DRY in tests is good.
 
 ## Write less code
 
@@ -38,7 +38,7 @@ Lazy means efficient, not careless. Deletion over addition, boring over clever, 
 
 ## Comments
 
-Code should be self-documenting, expressing the truth rather than pointing to its source. If a comment is needed to explain **what** the code does, consider refactoring the code to make its intent clearer instead of adding the comment.
+Code should be self-documenting, expressing the truth rather than pointing to its source. If a comment is needed to explain what the code does, consider refactoring the code to make its intent clearer instead of adding the comment.
 
 Comments are only acceptable when they explain WHY something is done a certain way, and should include a link to the GitHub issue or comment that explains the reasoning.
 
@@ -50,6 +50,10 @@ Comments are only acceptable when they explain WHY something is done a certain w
 - Comments about updates to old code ("<- now supports xyz")
 
 ## Markdown
+
+Do not use bold emphasis in replies, documentation, PR descriptions, or other prose. This includes both double-asterisk and double-underscore Markdown. Use plain text and clear wording. Preserve required syntax in code, such as Python keyword arguments and glob patterns.
+
+Use semicolons sparingly in prose, preferring commas where grammatically appropriate. Keep the sentence structure when it reads well. Preserve semicolons required by code or configuration syntax.
 
 Never hard-wrap prose in Markdown files. Write each paragraph as a single line and let the editor soft-wrap. Hard wraps make diffs noisy — a one-word edit reflows the whole paragraph.
 
@@ -112,10 +116,10 @@ We have a template for bug reports in `.github/ISSUE_TEMPLATE/bug-report.md`. Al
 
 Report the bug, not the fix. Keep every section short:
 
-- **Describe the bug**: two or three sentences on what is wrong.
-- **To reproduce**: the fewest steps that show it.
-- **Expected behavior**: one line.
-- **Additional context**: Links to related issues/commits or Helpscout/Slack messages. Nothing more.
+- Describe the bug: two or three sentences on what is wrong.
+- To reproduce: the fewest steps that show it.
+- Expected behavior: one line.
+- Additional context: Links to related issues/commits or Helpscout/Slack messages. Nothing more.
 
 No implementation plans, lists of files to change, or test and docs follow-ups: those belong in the PR that fixes it.
 
