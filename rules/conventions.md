@@ -89,7 +89,7 @@ Every commit message should end with one or multiple lines of `Refs #<issue-numb
 
 Commit titles should be limited to 50 characters and other lines to 72 characters. This is not a hard limit, if it makes sense, you can break it.
 
-If there is additional cleanup included in the commit, add it to the body like so:
+If there is additional cleanup included in the commit, end the body with it. One item is a sentence, like "Also, drop the crontab and its pre-commit hook." List several like so:
 
 ```
 Also:
@@ -100,7 +100,20 @@ Also:
 
 Describe the change, not its history. No references to past implementations, earlier bugs, or what the code used to do — we don't host legacy versions and we clean up as we go, so the old state is noise to whoever reads this next.
 
-NEVER append "Authored by Claude Code" to commit messages.
+Write the body for a teammate reading `git log` a year from now: why the change was needed and what it changes, in plain words. Two to four sentences is typical, and a small chore needs one ("pgcrypto is in core Postgres now, and we don't use hstore.").
+
+- Lead with the purpose a person cares about, not the mechanism: "Make it obvious which vendors were invited", not the new relationship and how it is loaded.
+- Give the one or two numbers that make the case, rounded: "2s of work", not "0.5-1.7s". No event counters, load averages or exit codes.
+- Leave out the implementation: edge cases, defensive handling, file modes, config keys, how a guarantee is enforced. The diff shows them.
+- Leave out how it was verified ("make check passes", "verified on Lara"), how the problem was investigated, and what is still pending. CI shows the checks, and the issue holds the investigation and the follow-ups.
+- Prefer everyday words to internal ones: "the CI job", not "the fleet".
+- Write like a teammate, "we" is fine.
+- One idea per bullet.
+- Reference issues only in the `Refs` lines at the end.
+
+Before keeping a sentence, ask: would a teammate reading `git log` in a year miss it? If not, cut it.
+
+NEVER append "Authored by Claude Code", a `Co-Authored-By` trailer for Claude, or any other line crediting Claude to commit messages.
 
 ### User Stories
 
