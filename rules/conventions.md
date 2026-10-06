@@ -109,7 +109,6 @@ Write the body for a teammate reading `git log` a year from now: why the change 
 - Prefer everyday words to internal ones: "the CI job", not "the fleet".
 - Write like a teammate, "we" is fine.
 - One idea per bullet.
-- Reference issues only in the `Refs` lines at the end.
 
 Before keeping a sentence, ask: would a teammate reading `git log` in a year miss it? If not, cut it.
 
