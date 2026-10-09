@@ -85,7 +85,7 @@ The prefix can be one of the following:
 - `fix`: for bug fixes
 - `chore`: other
 
-Every commit message should end with one or multiple lines of `Refs #<issue-number>`, linking to the relevant GitHub issue(s).
+Every commit message should end with one or multiple lines of `Refs #<issue-number>`, linking to the relevant GitHub issue(s). Verify each reference points to the intended issue in the correct repository. Use `Refs owner/repo#<issue-number>` for issues in another repository. Never invent an issue number or use the current PR's number as a substitute. If there is no relevant issue, omit the reference.
 
 Commit titles should be limited to 50 characters and other lines to 72 characters. This is not a hard limit, if it makes sense, you can break it.
 
@@ -147,6 +147,8 @@ Also:
 ```
 
 Unwrap it, though: commit bodies hard-wrap at 72 characters, but a PR body renders as Markdown, so join each wrapped paragraph back onto a single line. Verbatim in words, not in line breaks.
+
+NEVER let a PR body reference the PR itself, whether by `#<number>`, `owner/repo#<number>`, or a full URL. Before creating or updating a PR, check references against its repository and number, then read back the saved body after creation when its number is known. Remove any self-reference immediately and correct the source commit body too. This rule overrides verbatim copying. Compare repository and number together: a reference to the same number in another repository is not a self-reference.
 
 If you find yourself writing a section heading in a PR body, stop — you're doing it wrong.
 
