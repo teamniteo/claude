@@ -156,7 +156,7 @@ PRs should generally have only a single commit. Only if you are fixing something
 
 ## Documentation
 
-After finishing your work, look for `documentation/` and `frontend/static/documentation/` folders. These contain our documentation. If applicable, update them based on the work you have just performed.
+After finishing your work, look for the `documentation/` folder. It contains our documentation as Markdown. If applicable, update it based on the work you have just performed. Never edit `frontend/static/docs.json` by hand, it is generated from `documentation/`.
 
 Also update any README.md files you encounter, if applicable.
 

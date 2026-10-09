@@ -27,7 +27,7 @@ git symbolic-ref --short refs/remotes/origin/HEAD
 **Capabilities.** Each later section applies only if its files exist in the repo:
 
 - `demo/days/*.sql` / `demo/days/*.sorted` snapshots → the demo conflict auto-resolution and the demo regeneration note.
-- `backend/src/*/openapi.yaml` with a generated `frontend/src/Api/Data.elm` → the codegen conflict auto-resolution and the regen step.
+- `backend/src/*/openapi.yaml` with a generated Elm client in `frontend/src/Api/` → the regen step.
 - `backend/src/*/db/versions/` → the alembic sections.
 - `codegen` / `dist` / `check` targets in the backend and frontend Makefiles → the regen and verify commands.
 
@@ -151,7 +151,7 @@ git rebase "$TARGET"
 
 Loop until rebase completes or you hit a conflict that needs the user. After each `git rebase --continue`, re-check for the next conflict.
 
-The two auto-resolutions below apply only to the generated files detected in "Detect the project".
+The auto-resolution below applies only to the generated files detected in "Detect the project".
 
 **Conflict only in `demo/days/*.sql` / `demo/days/*.sorted`** — take the rebase target's version. These are auto-generated; hand-merging them produces nonsense.
 
@@ -162,14 +162,6 @@ git rebase --continue
 ```
 
 (During a rebase, `--ours` is the upstream side = the rebase target's version, `--theirs` is the commit being replayed.)
-
-**Conflict in `frontend/src/Api/Data.elm`** — take the rebase target's version; it'll be regenerated below.
-
-```sh
-git checkout --ours -- frontend/src/Api/Data.elm
-git add frontend/src/Api/Data.elm
-git rebase --continue
-```
 
 **Both sides renamed the same migration file to different names** — this happens when a later commit on the branch already carried its own rename of a migration that the "Update branch migration dates" step below also renames. Keep the newer date this skill is applying and drop the older rename, so the file exists exactly once. Then re-run the static graph check in "Alembic migration rebase" before continuing — a dropped rename can leave a `down_revision` pointing at the wrong file.
 
@@ -277,7 +269,7 @@ If `make devdb` fails, the DB verification is meaningless; flag it in the final 
 
 ## Regenerate codegen + rebuild frontend
 
-If the project has the `codegen` and `dist` targets, always run these two, in this order — regardless of what the rebase target changed. Running `make codegen` first guarantees `frontend/src/Api/Data.elm` matches the rebased `openapi.yaml`, which then lets `make dist` compile cleanly in a single pass (no "run it twice" workaround). **Always through `nix-shell`**, not `devenv` or `make` directly — devenv has a stale-cache issue that produces "unknown alias" / missing-constructor errors after openapi-generator runs.
+If the project has the `codegen` and `dist` targets, always run these two, in this order — regardless of what the rebase target changed. Entering `nix-shell` regenerates the gitignored Elm client in `frontend/src/Api/` from the rebased `openapi.yaml`, and `make codegen` refreshes the committed generated files, which then lets `make dist` compile cleanly in a single pass (no "run it twice" workaround). **Always through `nix-shell`**, not `devenv` or `make` directly — devenv has a stale-cache issue that produces "unknown alias" / missing-constructor errors after the Elm client is regenerated.
 
 ```sh
 cd backend && nix-shell --run "make codegen"

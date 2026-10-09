@@ -93,7 +93,7 @@ As per our "Automation over discipline" philosophy, we want to do as much as pos
 * Never edit these files manually.
 * If you change `openapi.yaml`, remember to run `make codegen` to update the generated files.
 * CI runs `make codegen` + `uncommitted-changes` to catch drift.
-* `make codegen` does NOT regenerate `frontend/src/Api/Data.elm` — that requires `nix-shell` (which runs `openapi-generator-cli`).
+* `make codegen` does NOT regenerate the Elm API client in `frontend/src/Api/` (`Api.elm`, `Types.elm`, `Json.elm`) — that requires `nix-shell` (which runs `elm-open-api`).
 
 ## Logging
 
